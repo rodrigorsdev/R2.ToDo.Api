@@ -12,9 +12,10 @@ namespace R2.Todo.Infra.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TodoItem>().ToTable("Todo");
             modelBuilder.Entity<TodoItem>().Property(a => a.Id);
-            modelBuilder.Entity<TodoItem>().Property(a => a.User).HasMaxLength(120);
-            modelBuilder.Entity<TodoItem>().Property(a => a.Title).HasMaxLength(160);
+            modelBuilder.Entity<TodoItem>().Property(x => x.User).HasMaxLength(120).HasColumnType("varchar(120)");
+            modelBuilder.Entity<TodoItem>().Property(x => x.Title).HasMaxLength(160).HasColumnType("varchar(160)");
             modelBuilder.Entity<TodoItem>().Property(a => a.Done);
             modelBuilder.Entity<TodoItem>().Property(a => a.Date);
             modelBuilder.Entity<TodoItem>().HasIndex(a => a.User);
