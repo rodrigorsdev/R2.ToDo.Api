@@ -21,11 +21,11 @@ namespace R2.Todo.Domain.Commands
 
         public void Validate()
         {
-            AddNotifications(
-                new Contract()
-                    .Requires()
-                    .HasMinLen(User, 6, "User", "Usuário inválido!")
-            );
+            //AddNotifications(
+            //    new Contract()
+            //        .Requires()
+            //        .HasMinLen(User, 6, "User", "Usuário inválido!")
+            //);
         }
     }
 }

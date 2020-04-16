@@ -60,6 +60,19 @@ namespace R2.Todo.Api.Controllers
                 true);
         }
 
+        [Route("undone/today")]
+        [HttpGet]
+        public IEnumerable<TodoItem> GetUndoneForToday(
+         [FromServices]ITodoRepository repository
+        )
+        {
+            string user = User.Claims.FirstOrDefault(a => a.Type == "user_id")?.Value;
+            return repository.GetByPeriod(
+                user,
+                DateTime.Now.Date,
+                false);
+        }
+
         [Route("undone/tomorrow")]
         [HttpGet]
         public IEnumerable<TodoItem> GetUndoneForTomorrow(
@@ -90,6 +103,8 @@ namespace R2.Todo.Api.Controllers
             [FromServices]TodoHandler handler
         )
         {
+            string user = User.Claims.FirstOrDefault(a => a.Type == "user_id")?.Value;
+            command.User = user;
             return (GenericCommandResult)handler.Handle(command);
         }
 
@@ -100,6 +115,8 @@ namespace R2.Todo.Api.Controllers
             [FromServices]TodoHandler handler
         )
         {
+            string user = User.Claims.FirstOrDefault(a => a.Type == "user_id")?.Value;
+            command.User = user;
             return (GenericCommandResult)handler.Handle(command);
         }
 
@@ -110,6 +127,8 @@ namespace R2.Todo.Api.Controllers
              [FromServices]TodoHandler handler
          )
         {
+            string user = User.Claims.FirstOrDefault(a => a.Type == "user_id")?.Value;
+            command.User = user;
             return (GenericCommandResult)handler.Handle(command);
         }
     }
